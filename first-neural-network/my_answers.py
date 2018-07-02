@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class NeuralNetwork(object):
     def __init__(self, input_nodes, hidden_nodes, output_nodes, learning_rate):
         # Set number of nodes in input, hidden and output layers.
@@ -64,15 +63,14 @@ class NeuralNetwork(object):
         #### Implement the forward pass here ####
         ### Forward pass ###
         # TODO: Hidden layer - Replace these values with your calculations.
-        inputs = np.array(X, ndmin=2)
-        hidden_inputs = np.dot(inputs, self.weights_input_to_hidden) # signals into hidden layer
+        if len(X.shape) == 1:
+          X = X.reshape(-1, X.shape[0])
+        hidden_inputs = np.dot(X, self.weights_input_to_hidden) # signals into hidden layer
         hidden_outputs = self.activation_function(hidden_inputs) # signals from hidden layer
-        print('shape of hidden_outputs', hidden_outputs.shape)
 
         # TODO: Output layer - Replace these values with your calculations.
         final_inputs = np.dot(hidden_outputs, self.weights_hidden_to_output) # signals into final output layer
         final_outputs = final_inputs # signals from final output layer
-        print('shape of final_outputs', final_outputs.shape)
         
         return final_outputs, hidden_outputs
 
@@ -91,23 +89,22 @@ class NeuralNetwork(object):
         ### Backward pass ###
 
         # TODO: Output error - Replace this value with your calculations.
+        if len(X.shape) == 1:
+          X = X.reshape(-1, X.shape[0])
         error = y - final_outputs # Output layer error is the difference between desired target and actual output.
-        print('shape of output_errors:', error.shape)
-        print('shape of weights_hidden_to_output:', self.weights_hidden_to_output.shape)
         
         # TODO: Calculate the hidden layer's contribution to the error
-        hidden_error = np.dot(self.weights_hidden_to_output, error.T)
+        hidden_error = np.dot(error, self.weights_hidden_to_output.T)
         
         # TODO: Backpropagated error terms - Replace these values with your calculations.
         output_error_term = error
         hidden_error_term = hidden_error * hidden_outputs * (1 - hidden_outputs)
+#         print('shape: hidden_error: {}, hidden_output: {}, hidden_error_term: {}'.format(
+#             hidden_error.shape, hidden_outputs.shape, hidden_error_term.shape))
         
         # Weight step (input to hidden)
-        delta_weights_i_h += np.dot(output_errors * output_grad, inputs)
-        # Weight step (hidden to output)
-        delta_weights_h_o += np.dot(hidden_errors * hidden_grad, hidden_outputs)
-        #print(delta_weights_i_h.shape)
-        #print(delta_weights_h_o.shape)
+        delta_weights_i_h += hidden_error_term * X.T
+        delta_weights_h_o += output_error_term * hidden_outputs.T
         return delta_weights_i_h, delta_weights_h_o
 
     def update_weights(self, delta_weights_i_h, delta_weights_h_o, n_records):
@@ -133,22 +130,22 @@ class NeuralNetwork(object):
         
         #### Implement the forward pass here ####
         # TODO: Hidden layer - replace these values with the appropriate calculations.
-        hidden_inputs = features.dot(self.weights_input_to_hidden) # signals into hidden layer
+        hidden_inputs = np.dot(features,self.weights_input_to_hidden) # signals into hidden layer
         hidden_outputs = self.activation_function(hidden_inputs) # signals from hidden layer
-        
+         
         # TODO: Output layer - Replace these values with the appropriate calculations.
-        final_inputs = hidden_outputs.dot(self.weights_hidden_to_output) # signals into final output layer
-        final_outputs = final_inputs # signals from final output layer 
+        final_inputs = np.dot(hidden_outputs, self.weights_hidden_to_output)# signals into final output layer
+        final_outputs = final_inputs#self.activation_function(final_inputs) # signals from final output layer 
         
         #print('final outputs', final_outputs)
         
-        return final_outputs
+        return np.squeeze(final_outputs)
 
 
 #########################################################
 # Set your hyperparameters here
 ##########################################################
-iterations = 3000
-learning_rate = 0.1
-hidden_nodes = 15
+iterations = 3200
+learning_rate = 0.5
+hidden_nodes = 16
 output_nodes = 1
