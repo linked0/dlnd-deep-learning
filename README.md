@@ -1,3 +1,7 @@
+# 개요
+아래 사이트에서 항상 최신 소스를 확인해야함. 그리고, 원본 소스는 수정을 하지 말고, 복사본을 만들어서 연습하고 라이브러리를 만들어야 함.
+https://github.com/udacity/deep-learning
+
 # 중요 리소스
 ## GAN
 #### Progressive GAN
