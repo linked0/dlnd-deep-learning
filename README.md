@@ -4,7 +4,6 @@ https://github.com/udacity/deep-learning
 
 # 논문
 * [Systematic evaluation of CNN advances on the ImageNet](https://arxiv.org/pdf/1606.02228.pdf)
-
 * [CONTINUOUS CONTROL WITH DEEP REINFORCEMENT LEARNING](https://arxiv.org/pdf/1509.02971.pdf)
 
 # 중요 리소스
