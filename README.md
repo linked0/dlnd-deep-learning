@@ -2,6 +2,12 @@
 아래 사이트에서 항상 최신 소스를 확인해야함. 그리고, 원본 소스는 수정을 하지 말고, 복사본을 만들어서 연습하고 라이브러리를 만들어야 함.
 https://github.com/udacity/deep-learning
 
+# 논문
+* [Systematic evaluation of CNN advances on the ImageNet](https://arxiv.org/pdf/1606.02228.pdf)
+* [CONTINUOUS CONTROL WITH DEEP REINFORCEMENT LEARNING](https://arxiv.org/pdf/1509.02971.pdf)
+* [Human-level control through deep reinforcement learning](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf)
+* [Learning Transferable Architectures for Scalable Image Recognition](https://arxiv.org/pdf/1707.07012.pdf)
+
 # 중요 리소스
 ## GAN
 #### Progressive GAN
